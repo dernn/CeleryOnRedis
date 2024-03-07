@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import dotenv_values  # use python-dotenv
+
+config = dotenv_values()  # include all values from .env like dict
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-g8l07g0axxcdkwi^u+e1w7-t7z90so^=!i^v&fw$)76*bn1tko'
+SECRET_KEY = config['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -122,3 +125,17 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# for D10.3: Celery|Redis setup
+# указывает на URL брокера сообщений (Redis). По умолчанию он находится на порту 6379.
+# для Redis Labs (cloud) CELERY_BROKER_URL и CELERY_RESULT_BACKEND
+# по шаблону 'redis://:<password>@<endpoint:port>'
+CELERY_BROKER_URL = f'redis://:{config["REDIS_PASSWORD"]}@{config["REDIS_ENDPOINT"]}'
+# указывает на хранилище результатов выполнения задач
+CELERY_RESULT_BACKEND = f'redis://:{config["REDIS_PASSWORD"]}@{config["REDIS_ENDPOINT"]}'
+# допустимый формат данных
+CELERY_ACCEPT_CONTENT = ['application/json']
+# метод сериализации задач
+CELERY_TASK_SERIALIZER = 'json'
+# метод сериализации результатов
+CELERY_RESULT_SERIALIZER = 'json'
