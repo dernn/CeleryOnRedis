@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import IndexView
+from .views import IndexView, NewOrderView, take_order
 
 urlpatterns = [
-    # добавлять в конфигурацию проекта ('Tutorial/urls.py') не будем
-    path('', IndexView.as_view()),  # путь ссылается на корень
+    path('', IndexView.as_view()),
+    path('new/', NewOrderView.as_view(), name='new_order'),
+    path('take/<int:oid>', take_order, name='take_order')
 ]

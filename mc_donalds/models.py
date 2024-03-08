@@ -33,6 +33,9 @@ class Product(models.Model):
     price = models.FloatField(default=0.0)
     composition = models.TextField(default="Composition not specified")
 
+    def __str__(self):
+        return self.name + "/" + str(self.price)
+
 
 class Staff(models.Model):
     director = 'DI'
