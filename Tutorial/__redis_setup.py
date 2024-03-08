@@ -11,3 +11,7 @@
 # А в другом — запустить Celery:
 # celery -A <project_name> worker -l INFO --pool=solo
 # (!) <project_name> здесь каталог конфигурации проекта (где settings.py etc.)
+#
+# Start celery worker with --purge or --discard command how to remove task from queue
+#
+#
