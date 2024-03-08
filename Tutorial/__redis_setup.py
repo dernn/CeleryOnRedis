@@ -9,4 +9,5 @@
 # python manage.py runserver
 #
 # А в другом — запустить Celery:
-# celery --pool=solo -A proj_name worker -l INFO
+# celery -A <project_name> worker -l INFO --pool=solo
+# (!) <project_name> здесь каталог конфигурации проекта (где settings.py etc.)
