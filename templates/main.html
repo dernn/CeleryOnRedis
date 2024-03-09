@@ -4,13 +4,15 @@
     </head>
     <body>
         <div>
-            <h1><a href="/">Order board</a></h1>
+            <h1><a href="/board/">Order board</a></h1>
         </div>
-        <div>
-            <button>
-                <a href="{% url 'new_order'%}"> Добавить заказ </a>
-            </button>
-        </div>
+        {% if orders %}
+            <div>
+                <button>
+                    <a href="{% url 'new_order'%}"> Добавить заказ </a>
+                </button>
+            </div>
+        {% endif %}
         {% block content %}
         {% endblock %}
     </body>

@@ -10,7 +10,7 @@ class Order(models.Model):  # наследуемся от класса Model
     take_away = models.BooleanField(default=False)
     complete = models.BooleanField(default=False)
 
-    staff = models.ForeignKey('Staff', on_delete=models.CASCADE, related_name='orders')
+    staff = models.ForeignKey('Staff', on_delete=models.CASCADE, related_name='orders', default=4)
     products = models.ManyToManyField('Product', through='ProductOrder')
 
     def finish_order(self):

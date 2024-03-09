@@ -1,7 +1,7 @@
 from datetime import datetime
+from pprint import pprint
 
 from django.shortcuts import redirect
-from django.views import View
 from django.views.generic import CreateView, TemplateView
 
 from .models import Order
@@ -33,7 +33,8 @@ class NewOrderView(CreateView):
         order.save()
         # в аргументы задачи не рекомендуется передавать объекты модели напрямую
         complete_order.apply_async([order.pk], countdown=60)  # вместо этого ID или параметры
-        return redirect('board/')
+        # redirect без '/' перед GET-параметром (пр. 'board/') добавляет значение к текущей GET-позиции
+        return redirect('/board/')
 
 
 # представление для "кнопки", чтобы можно было забрать заказ
@@ -41,4 +42,4 @@ def take_order(request, oid):
     order = Order.objects.get(pk=oid)
     order.time_out = datetime.now()
     order.save()
-    return redirect('board/')
+    return redirect('/board/')
