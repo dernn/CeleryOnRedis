@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from celery import shared_task
 import time
 
@@ -12,7 +14,7 @@ def complete_order(oid):
 
 
 @shared_task
-def printer(N):
-    for i in range(N):
-        time.sleep(1)
-        print(i + 1)
+def clear_old():
+    old_orders = Order.objects.all().exclude(time_in__gt=
+                                             datetime.now() - timedelta(minutes=5))
+    old_orders.delete()
