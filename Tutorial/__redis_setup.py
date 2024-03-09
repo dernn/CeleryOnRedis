@@ -18,7 +18,7 @@
 # (!) [WINDOWS:] в разных окнах терминала:
 #
 # celery -A <project_name> worker -l INFO --pool=solo
-# celery -A PROJECT beat -l INFO [--pool=solo(?)]
+# celery -A <project_name> beat -l INFO
 #
 # Настройки Celery позволяют создавать несколько воркеров, несколько очередей с различными маршрутизациями.
 #

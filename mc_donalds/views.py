@@ -1,5 +1,4 @@
 from datetime import datetime
-from pprint import pprint
 
 from django.shortcuts import redirect
 from django.views.generic import CreateView, TemplateView

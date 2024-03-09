@@ -8,11 +8,12 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 app.autodiscover_tasks()
 
+#
 app.conf.beat_schedule = {
-    'action_every_30_seconds': {  # имя периодической задачи
-        # параметры периодической задачи
-        'task': 'tasks.action',  # задачу вызываем из файла 'tasks.py', как и прежде
-        'schedule': 30,  # периодичность
-        'args': ("some_arg"),
+    'print_every_5_seconds': {  # <действие>_<периодичность>
+        'task': 'mc_donalds.tasks.printer',  # вызываем таску printer
+        'schedule': 5,  # каждые 5 секунд
+        'args': (5,),  # передаем аргумент в таску (длина счёта)
     },
+    # здесь может быть ещё одна таска
 }
