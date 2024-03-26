@@ -1,4 +1,5 @@
-# импорт
+# импорт нативных массивов для PpostgreSQL
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from datetime import datetime
 
@@ -81,3 +82,14 @@ class ProductOrder(models.Model):
     def amount(self, value):
         self._amount = int(value) if value >= 0 else 0
         self.save()
+
+
+class User(models.Model):
+    # массив из восьми полей типа varchar(10)
+    pseudonyms = ArrayField(
+        models.CharField(max_length=10, blank=True),
+        size=8,
+        null=True,
+    )
+    name = models.CharField(max_length=200)
+    profile_data = models.JSONField(null=True)
